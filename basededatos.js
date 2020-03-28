@@ -1,4 +1,4 @@
-  var firebaseConfig = {
+var firebaseConfig = {
     apiKey: "AIzaSyD0zli0w6ZQmy7cfkPts3a8zIsqcsO1NmA",
     authDomain: "sistemasgeoapi.firebaseapp.com",
     databaseURL: "https://sistemasgeoapi.firebaseio.com",
