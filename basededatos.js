@@ -1,12 +1,13 @@
-var firebaseConfig = {
-        apiKey: "AIzaSyCrXFL_mMbyLRVSC9Fn6_lfsDjMx54EzlE",
-        authDomain: "proyecto1-935aa.firebaseapp.com",
-        databaseURL: "https://proyecto1-935aa.firebaseio.com",
-        projectId: "proyecto1-935aa",
-        storageBucket: "proyecto1-935aa.appspot.com",
-        messagingSenderId: "514873387506",
-        appId: "1:514873387506:web:fa75cac073ad42be0b636b"
-    };
+  var firebaseConfig = {
+    apiKey: "AIzaSyD0zli0w6ZQmy7cfkPts3a8zIsqcsO1NmA",
+    authDomain: "sistemasgeoapi.firebaseapp.com",
+    databaseURL: "https://sistemasgeoapi.firebaseio.com",
+    projectId: "sistemasgeoapi",
+    storageBucket: "sistemasgeoapi.appspot.com",
+    messagingSenderId: "519312779624",
+    appId: "1:519312779624:web:f476119a7c88d9ea468edd",
+    measurementId: "G-ECV401W314"
+  };
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
