@@ -1,0 +1,112 @@
+<! DOCTYPE html >
+< html  lang = " en " >
+< cabeza >
+    < meta  charset = " UTF-8 " >
+    < meta  name = " viewport " content = " ancho = ancho del dispositivo, escala inicial = 1.0 " >
+    < título > Posición del reloj </ título >
+    < Enlace  rel = " hoja de estilo " href =" https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css " integridad =" SHA384-Gn5384xqQ1aoWXA + 058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW / dAiS6JXm " crossorigin =" anónimo " >
+    < estilo >
+        html ,  cuerpo {
+            margen : 0 px ;
+            relleno : 0 ;
+        }
+        # mapa {
+            ancho : 100 % ;
+            altura : 340 px ;
+        }
+    </ estilo >
+</ cabeza >
+< cuerpo >
+    < div  class = " container text-center small " >
+        < div  class = " fila m-2 " >
+            < div  class = " col-6 " >
+                < button  class = " btn btn-sm btn-success " id = " btnIniciar " > Posición del reloj </ button >
+            </ div >
+            < div  class = " col-6 " >
+                < button  class = " btn btn-sm btn-dark " id = " btnDetener " > Detener </ button >
+            </ div >
+        </ div >
+        < div  class = " fila m-2 " >
+            < div  class = " col-12 " id = " datos " > </ div >
+        </ div >
+    </ div >
+
+    < div  id = " mapa " > </ div >
+
+    < guión >
+        función  iniciaMapa ( ) {
+            var  propiedades  =  {
+                centro : { 
+                    lat : 21.152639 ,  lng :   - 101.711598
+                } ,
+                zoom : 12
+            } ;
+            var  mapa  =  documento . getElementById ( "mapa" ) ;
+             mapa  var =  nuevo  google . mapas . Mapa ( mapa ,  propiedades ) ;
+            var  icono  =  {
+                url : "https://media.giphy.com/media/1ZweHMlSaxcc32mSSu/giphy.gif" , 
+                scaledSize : nuevo  google . mapas . Tamaño ( 50 ,  50 ) ,  
+                origen : nuevo  google . mapas . Punto ( 0 , 0 ) ,  
+                ancla : nuevo  google . mapas . Punto ( 0 , 0 ) 
+            } ;
+             marcador  var =  nuevo  google . mapas . Marcador ( {
+                posición : {  lat : 0 ,  lng : 0  } ,
+                icono : icono ,
+
+                mapa : mapa
+            } ) ;
+            var  watchId  = nulo ;
+            const  btnIniciar  =  documento . getElementById ( "btnIniciar" ) ;
+
+            var  positionOptions  =  {
+                enableHighAccuracy : verdadero ,
+                tiempo de espera : 10 * 1000 ,
+                edad máxima : 30 * 1000
+            }
+            if ( navegador . geolocalización ) {
+                btnIniciar . addEventListener ( 'click' ,  function ( ) {
+                    watchId  =  navegador . geolocalización . watchPosition ( función ( posición ) {
+                        var  lat  =  posición . Coords . latitud ;
+                        var  lng  =  posición . Coords . longitud ;
+                        var  coordenadas  =  lat  +  ','  +  lng ;
+                        var  exactitud  =  posición . Coords . precisión ? posición . Coords . precisión : 'no disponible' ;
+                        var  altitud  =  posición . Coords . altitud ? posición . Coords . altitud : 'no disponible' ;
+                        var  velocidad  =  posición . Coords . velocidad ? posición . Coords . velocidad : 'no disponible' ;
+                        var  fechayhora  =  ( nueva  Fecha ( posición . marca de tiempo ) ) . toString ( ) ;
+                        const  html  =  `
+                            <p> Coordenadas: $ {  coordenadas  } </p>
+                            <p> Exactitud: $ {  exactitud  } </p>
+                            <p> Altitud: $ {  altitud  } </p>
+                            <p> Velocidad: $ {  velocidad  } </p>
+                            <p> Fecha y Hora: $ {  fechayhora  } </p>
+                        ` ;
+                        const  datos  =  documento . getElementById ( 'datos' ) ;
+                        datos . innerHTML  =  html ;
+                        marcador . setPosition ( nuevo  google . maps . LatLng ( lat , lng ) ) ;
+                        mapear . panTo ( nuevo  google . maps . LatLng ( lat , lng ) ) ;
+                    } ,  error ,  positionOptions ) ;
+                } ) ;
+                const  btnDetener  =  documento . getElementById ( 'btnDetener' ) ;
+                btnDetener . addEventListener ( 'click' ,  function ( ) {
+                    if ( watchId ! == null ) {
+                        Navigator . geolocalización . clearWatch ( watchId ) ;
+                        const  html  =  `
+                            <p> Se detuvo el Monitoreo </p>
+                        ` ;
+                        const  datos  =  documento . getElementById ( 'datos' ) ;
+                        datos . innerHTML  =  html ;
+                    }
+                } ) ;
+            }
+             error de función ( positionError ) {
+                consola . log ( PositionError . mensaje )
+            }
+        }
+    </ script >
+    
+    < Guión  src = " https://code.jquery.com/jquery-3.2.1.slim.min.js " integridad =" sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr / RE9 / Qpg6aAZGJwFDMVNA / GpGFF93hXpG5KkN " crossorigin =" Anónimo " > </ script de >
+    < Guión  src =" https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integridad =" -ApNbgh9B SHA384 + Y1QKtv3Rn7W3mgPxhU9K / ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin =" anónimo " > </ script >
+    < Guión  src = " https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integridad =" SHA384-JZR6Spejh4U02d8jOt6vLEHfe / JQGiRRSQQxSfFWpi1MquVdAyjUar5 + 76PVCmYl " crossorigin =" anónimo " > </ escritura >
+    < Guión  src = " https://maps.googleapis.com/maps/api/js?key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA&callback=iniciaMapa " asíncrono  Defer > </ escritura >
+</ cuerpo >
+</ html >
